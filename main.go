@@ -6,7 +6,6 @@ import (
 	"bwastartup/handler"
 	"bwastartup/helper"
 	"bwastartup/user"
-	"fmt"
 	"log"
 	"net/http"
 	"strings"
@@ -42,13 +41,13 @@ func main() {
 	campaignService := campaign.NewService(campaignRepository)
 	authService := auth.NewService()
 
-	campaigns, err := campaignService.FindCampaigns(0)
-	for _, campaign := range campaigns {
-		fmt.Println(campaign.Name)
-		if len(campaign.CampaignImages) > 0 {
-			fmt.Println(campaign.CampaignImages[0].FileName)
-		}
-	}
+	// campaigns, err := campaignService.FindCampaigns(0)
+	// for _, campaign := range campaigns {
+	// 	fmt.Println(campaign.Name)
+	// 	if len(campaign.CampaignImages) > 0 {
+	// 		fmt.Println(campaign.CampaignImages[0].FileName)
+	// 	}
+	// }
 
 	// token, err := authService.ValidateToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo0fQ.O8fze3oVIP-7ATWjLpLljtSFlgUViFzu45dhrcyv8mc")
 
@@ -94,6 +93,7 @@ func main() {
 	// }
 
 	userHandler := handler.NewUserHandler(userService, authService)
+	campaignHanlder := handler.NewCampaignHandler(campaignService)
 
 	router := gin.Default()
 
@@ -103,6 +103,8 @@ func main() {
 	api.POST("/sessions", userHandler.Login)
 	api.POST("/email_checkers", userHandler.CheckEmailAvailability)
 	api.POST("/avatars", authMiddleware(authService, userService), userHandler.UploadAvatar)
+
+	api.GET("/campaigns", campaignHanlder.GetCampaigns)
 	router.Run()
 
 	// Step
