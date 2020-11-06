@@ -41,6 +41,20 @@ func main() {
 	campaignService := campaign.NewService(campaignRepository)
 	authService := auth.NewService()
 
+	// input := campaign.CreateCampaignInput{}
+	// input.Name = "Pangalangan dana"
+	// input.ShortDescription = "short"
+	// input.Description = "looooo"
+	// input.GoalAmount = 100000
+	// input.Perks = "perks1, perks2, perks3"
+	// inputUser, _ := userService.GetUserByID(1)
+	// input.User = inputUser
+
+	// _, err = campaignService.CreateCampaign(input)
+	// if err != nil {
+	// 	log.Fatal(err.Error())
+	// }
+
 	// campaigns, err := campaignService.FindCampaigns(0)
 	// for _, campaign := range campaigns {
 	// 	fmt.Println(campaign.Name)
@@ -107,6 +121,7 @@ func main() {
 
 	api.GET("/campaigns", campaignHanlder.GetCampaigns)
 	api.GET("/campaigns/:id", campaignHanlder.GetCampaign)
+	api.POST("/campaigns", authMiddleware(authService, userService), campaignHanlder.CreateCampaign)
 	router.Run()
 
 	// Step
