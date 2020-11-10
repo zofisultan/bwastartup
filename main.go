@@ -123,6 +123,7 @@ func main() {
 	api.GET("/campaigns/:id", campaignHanlder.GetCampaign)
 	api.POST("/campaigns", authMiddleware(authService, userService), campaignHanlder.CreateCampaign)
 	api.PUT("/campaigns/:id", authMiddleware(authService, userService), campaignHanlder.UpdateCampaign)
+	api.POST("/campaigns-images", authMiddleware(authService, userService), campaignHanlder.UploadImage)
 	router.Run()
 
 	// Step
