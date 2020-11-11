@@ -29,6 +29,14 @@ func main() {
 	campaignRepository := campaign.NewRepository(db)
 	transactionRepository := transaction.NewRepository(db)
 
+	// var transactionUser []transaction.Transaction
+	// transactionUser, err = transactionRepository.GetByCampaignID(1)
+	// if err != nil {
+	// 	fmt.Println("tes error")
+	// }
+
+	// fmt.Println(len(transactionUser))
+
 	// campaigns, _ := campaignRepository.FindByUserID(1)
 
 	// fmt.Println(len(campaigns))
@@ -130,6 +138,7 @@ func main() {
 	api.POST("/campaigns-images", authMiddleware(authService, userService), campaignHanlder.UploadImage)
 
 	api.GET("/campaigns/:id/transactions", authMiddleware(authService, userService), transactionHanlder.GetCampaignTransactions)
+	api.GET("/transactions", authMiddleware(authService, userService), transactionHanlder.GetUserTransactions)
 	router.Run()
 
 	// Step
