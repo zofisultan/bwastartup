@@ -12,6 +12,8 @@
           <th>Name</th>
           <th>Email</th>
           <th>Occupation</th>
+          <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>        
@@ -21,6 +23,8 @@
             <td>{{ .Name }}</td>
             <td>{{ .Email }}</td>
             <td>{{ .Occupation }}</td>
+            <td><a href="/users/edit/{{ .ID }}" ><i class="fa fa-edit"></i></a></td>
+            <td><a href="/users/avatar/{{ .ID }}" ><i class="fa fa-camera"></i></a></td>
           </tr>  
           {{ end }}
       </tbody>
