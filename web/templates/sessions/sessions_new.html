@@ -1,0 +1,24 @@
+{{ define "content" }}
+
+<h2 class="mb-4">Login</h2>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <form action="/session" method="POST">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" name="email" placeholder="Enter email" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" placeholder="Enter password" class="form-control">
+            </div>
+
+            <div>
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>   
+
+{{ end }}
